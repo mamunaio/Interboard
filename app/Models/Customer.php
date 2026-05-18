@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Enums\CustomerStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Customer extends Model
 {
@@ -51,4 +52,25 @@ class Customer extends Model
     {
         return $this->belongsTo(InternetPackage::class);
     }
+
+    /**
+     * Get the invoices associated with this customer.
+     *
+     * @return HasMany<Invoice, $this>
+     */
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
+    /**
+     * Get the payments associated with this customer.
+     *
+     * @return HasMany<Payment, $this>
+     */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
 }
+
